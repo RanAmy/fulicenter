@@ -1,4 +1,4 @@
-package cn.ucai.fulicenter;
+package cn.ucai.fulicenter.application;
 
 
 public interface I {

@@ -1,4 +1,4 @@
-package cn.ucai.fulicenter.utils;
+package cn.ucai.fulicenter.view.utils;
 
 import android.app.Activity;
 import android.content.Intent;
