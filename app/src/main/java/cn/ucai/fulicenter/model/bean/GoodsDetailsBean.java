@@ -1,29 +1,9 @@
 package cn.ucai.fulicenter.model.bean;
 
-/**
- * Created by Administrator on 2017/1/9 0009.
- */
+import java.io.Serializable;
+import java.util.Arrays;
 
-public class GoodsDetailsBean {
-
-    /**
-     * id : 278
-     * goodsId : 7672
-     * catId : 291
-     * goodsName : 趣味煮蛋模具
-     * goodsEnglishName : Kotobuki
-     * goodsBrief : 将煮好的鸡蛋放到模具中，扣好卡扣，把蛋模放冰水，耐心等上10分钟，就可以变化成各种各样的形状，宝宝看了说不定胃口大开！
-     * shopPrice : ￥110
-     * currencyPrice : ￥140
-     * promotePrice : ￥0
-     * rankPrice : ￥140
-     * isPromote : false
-     * goodsThumb : 201509/thumb_img/7672_thumb_G_1442389445719.jpg
-     * goodsImg : 201509/thumb_img/7672_thumb_G_1442389445719.jpg
-     * addTime : 1476820611547
-     * shareUrl : http://m.fulishe.com/item/7672
-     * properties :
-     */
+public class GoodsDetailsBean implements Serializable {
 
     private int id;
     private int goodsId;
@@ -35,34 +15,12 @@ public class GoodsDetailsBean {
     private String currencyPrice;
     private String promotePrice;
     private String rankPrice;
-    private boolean isPromote;
     private String goodsThumb;
     private String goodsImg;
     private long addTime;
     private String shareUrl;
-    private String properties;
-
-    public GoodsDetailsBean() {
-    }
-
-    public GoodsDetailsBean(int id, int goodsId, int catId, String goodsName, String goodsEnglishName, String goodsBrief, String shopPrice, String currencyPrice, String promotePrice, String rankPrice, boolean isPromote, String goodsThumb, String goodsImg, long addTime, String shareUrl, String properties) {
-        this.id = id;
-        this.goodsId = goodsId;
-        this.catId = catId;
-        this.goodsName = goodsName;
-        this.goodsEnglishName = goodsEnglishName;
-        this.goodsBrief = goodsBrief;
-        this.shopPrice = shopPrice;
-        this.currencyPrice = currencyPrice;
-        this.promotePrice = promotePrice;
-        this.rankPrice = rankPrice;
-        this.isPromote = isPromote;
-        this.goodsThumb = goodsThumb;
-        this.goodsImg = goodsImg;
-        this.addTime = addTime;
-        this.shareUrl = shareUrl;
-        this.properties = properties;
-    }
+    private boolean isPromote;
+    private PropertiesBean[] properties;
 
     public int getId() {
         return id;
@@ -144,14 +102,6 @@ public class GoodsDetailsBean {
         this.rankPrice = rankPrice;
     }
 
-    public boolean isIsPromote() {
-        return isPromote;
-    }
-
-    public void setIsPromote(boolean isPromote) {
-        this.isPromote = isPromote;
-    }
-
     public String getGoodsThumb() {
         return goodsThumb;
     }
@@ -184,17 +134,25 @@ public class GoodsDetailsBean {
         this.shareUrl = shareUrl;
     }
 
-    public String getProperties() {
+    public boolean isPromote() {
+        return isPromote;
+    }
+
+    public void setPromote(boolean promote) {
+        this.isPromote = promote;
+    }
+
+    public PropertiesBean[] getProperties() {
         return properties;
     }
 
-    public void setProperties(String properties) {
+    public void setProperties(PropertiesBean[] properties) {
         this.properties = properties;
     }
 
     @Override
     public String toString() {
-        return "GoodsDetailsBean{" +
+        return "GoodDetailsBean{" +
                 "id=" + id +
                 ", goodsId=" + goodsId +
                 ", catId=" + catId +
@@ -205,12 +163,12 @@ public class GoodsDetailsBean {
                 ", currencyPrice='" + currencyPrice + '\'' +
                 ", promotePrice='" + promotePrice + '\'' +
                 ", rankPrice='" + rankPrice + '\'' +
-                ", isPromote=" + isPromote +
                 ", goodsThumb='" + goodsThumb + '\'' +
                 ", goodsImg='" + goodsImg + '\'' +
                 ", addTime=" + addTime +
                 ", shareUrl='" + shareUrl + '\'' +
-                ", properties='" + properties + '\'' +
+                ", promote=" + isPromote +
+                ", properties=" + Arrays.toString(properties) +
                 '}';
     }
 }

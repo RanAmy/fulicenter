@@ -1,32 +1,15 @@
 package cn.ucai.fulicenter.model.bean;
 
-/**
- * Created by Administrator on 2017/1/9 0009.
- */
+import java.io.Serializable;
 
-public class CartBean {
+public class CartBean implements Serializable {
 
-    /**
-     * id : 2016
-     * userName : a123456
-     * goodsId : 7672
-     * goods :
-     */
-
-    private int id;
+    private int id=0;
     private String userName;
     private int goodsId;
-    private String goods;
-
-    public CartBean() {
-    }
-
-    public CartBean(int id, String userName, int goodsId, String goods) {
-        this.id = id;
-        this.userName = userName;
-        this.goodsId = goodsId;
-        this.goods = goods;
-    }
+    private int count;
+    private boolean isChecked;
+    private GoodsDetailsBean goods;
 
     public int getId() {
         return id;
@@ -52,20 +35,58 @@ public class CartBean {
         this.goodsId = goodsId;
     }
 
-    public String getGoods() {
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public boolean isChecked() {
+        return isChecked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.isChecked = checked;
+    }
+
+    public GoodsDetailsBean getGoods() {
         return goods;
     }
 
-    public void setGoods(String goods) {
+    public void setGoods(GoodsDetailsBean goods) {
         this.goods = goods;
+    }
+
+
+    public CartBean() {
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof CartBean)) return false;
+
+        CartBean cartBean = (CartBean) o;
+
+        return getId() == cartBean.getId();
+
+    }
+
+    @Override
+    public int hashCode() {
+        return getId();
     }
 
     @Override
     public String toString() {
         return "CartBean{" +
                 "id=" + id +
-                ", userName='" + userName + '\'' +
+                ", userName=" + userName +
                 ", goodsId=" + goodsId +
+                ", count=" + count +
+                ", checked=" + isChecked +
                 ", goods='" + goods + '\'' +
                 '}';
     }

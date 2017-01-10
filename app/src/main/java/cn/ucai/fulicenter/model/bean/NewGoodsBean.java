@@ -1,30 +1,28 @@
 package cn.ucai.fulicenter.model.bean;
 
-/**
- * Created by Administrator on 2017/1/9 0009.
- */
+import java.io.Serializable;
 
-public class NewGoodsBean {
+public class NewGoodsBean implements Serializable {
+
     /**
-     * id : 10
-     * goodsId : 7661
+     * id : 1
+     * goodsId : 7672
      * catId : 0
-     * goodsName : 护足修复乳
-     * goodsEnglishName : 爱诗妍
-     * goodsBrief : 规格：100g 高效修复足部乳霜。两性配方有效减少肌肤发炎。融入高效AHAs/PHAs，温和有效磨砂，同时修复干燥粗糙足部肌肤。维他命原E和滋润精油有效舒缓清爽足部肌肤。 使用后足部肌肤更加柔滑舒适。通过皮肤科专家测试，不含香料和PABA。
-     * shopPrice : ￥335
-     * currencyPrice : ￥400
-     * promotePrice : ￥219
-     * rankPrice : ￥284
-     * isPromote : false
-     * goodsThumb : 201509/thumb_img/7661_thumb_G_1442384912537.jpg
-     * goodsImg : 201509/goods_img/7661_P_1442384912740.jpg
-     * colorId : 1
-     * colorName : 灰色
-     * colorCode : #959595
-     * colorUrl : 1
-     * addTime : 1442384912
+     * goodsName : 趣味煮蛋模具
+     * goodsEnglishName : Kotobuki
+     * goodsBrief : 将煮好的鸡蛋…
+     * shopPrice : ￥110
+     * currencyPrice : ￥140
+     * promotePrice : ￥0
+     * rankPrice : ￥0
      * promote : false
+     * goodsThumb : 201509/thumb_img/7672_thumb_G_14423845719.jpg
+     * goodsImg : 201509/goods_img/7672_P_1442389445199.jpg
+     * colorId : 4
+     * colorName : 绿色
+     * colorCode : #59d85c
+     * colorUrl : 1
+     * addTime : 1442389445    
      */
 
     private int id;
@@ -44,11 +42,7 @@ public class NewGoodsBean {
     private String colorName;
     private String colorCode;
     private String colorUrl;
-    private int addTime;
-    private boolean promote;
-
-    public NewGoodsBean() {
-    }
+    private String addTime;
 
     public int getId() {
         return id;
@@ -130,12 +124,12 @@ public class NewGoodsBean {
         this.rankPrice = rankPrice;
     }
 
-    public boolean isIsPromote() {
+    public boolean isPromote() {
         return isPromote;
     }
 
-    public void setIsPromote(boolean isPromote) {
-        this.isPromote = isPromote;
+    public void setPromote(boolean promote) {
+        this.isPromote = promote;
     }
 
     public String getGoodsThumb() {
@@ -186,27 +180,18 @@ public class NewGoodsBean {
         this.colorUrl = colorUrl;
     }
 
-    public int getAddTime() {
+    public String getAddTime() {
         return addTime;
     }
 
-    public void setAddTime(int addTime) {
+    public void setAddTime(String addTime) {
         this.addTime = addTime;
-    }
-
-    public boolean isPromote() {
-        return promote;
-    }
-
-    public void setPromote(boolean promote) {
-        this.promote = promote;
     }
 
     @Override
     public String toString() {
-        return "NewGoodsBean{" +
-                "addTime=" + addTime +
-                ", id=" + id +
+        return "NewGoodBean{" +
+                "id=" + id +
                 ", goodsId=" + goodsId +
                 ", catId=" + catId +
                 ", goodsName='" + goodsName + '\'' +
@@ -216,14 +201,14 @@ public class NewGoodsBean {
                 ", currencyPrice='" + currencyPrice + '\'' +
                 ", promotePrice='" + promotePrice + '\'' +
                 ", rankPrice='" + rankPrice + '\'' +
-                ", isPromote=" + isPromote +
+                ", promote=" + isPromote +
                 ", goodsThumb='" + goodsThumb + '\'' +
                 ", goodsImg='" + goodsImg + '\'' +
                 ", colorId=" + colorId +
                 ", colorName='" + colorName + '\'' +
                 ", colorCode='" + colorCode + '\'' +
                 ", colorUrl='" + colorUrl + '\'' +
-                ", promote=" + promote +
+                ", addTime='" + addTime + '\'' +
                 '}';
     }
 }

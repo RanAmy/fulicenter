@@ -1,21 +1,9 @@
 package cn.ucai.fulicenter.model.bean;
 
-/**
- * Created by Administrator on 2017/1/9 0009.
- */
+import java.io.Serializable;
+import java.util.Arrays;
 
-public class PropertiesBean {
-
-    /**
-     * id : 9522
-     * goodsId : 0
-     * colorId : 4
-     * colorName : 绿色
-     * colorCode : #59d85c
-     * colorImg : 201309/1380064997570506166.jpg
-     * colorUrl : 1
-     * albums :
-     */
+public class PropertiesBean implements Serializable {
 
     private int id;
     private int goodsId;
@@ -24,21 +12,7 @@ public class PropertiesBean {
     private String colorCode;
     private String colorImg;
     private String colorUrl;
-    private String albums;
-
-    public PropertiesBean() {
-    }
-
-    public PropertiesBean(int id, int goodsId, int colorId, String colorName, String colorCode, String colorImg, String colorUrl, String albums) {
-        this.id = id;
-        this.goodsId = goodsId;
-        this.colorId = colorId;
-        this.colorName = colorName;
-        this.colorCode = colorCode;
-        this.colorImg = colorImg;
-        this.colorUrl = colorUrl;
-        this.albums = albums;
-    }
+    private AlbumsBean[] albums;
 
     public int getId() {
         return id;
@@ -96,11 +70,11 @@ public class PropertiesBean {
         this.colorUrl = colorUrl;
     }
 
-    public String getAlbums() {
+    public AlbumsBean[] getAlbums() {
         return albums;
     }
 
-    public void setAlbums(String albums) {
+    public void setAlbums(AlbumsBean[] albums) {
         this.albums = albums;
     }
 
@@ -114,7 +88,7 @@ public class PropertiesBean {
                 ", colorCode='" + colorCode + '\'' +
                 ", colorImg='" + colorImg + '\'' +
                 ", colorUrl='" + colorUrl + '\'' +
-                ", albums='" + albums + '\'' +
+                ", albums=" + Arrays.toString(albums) +
                 '}';
     }
 }

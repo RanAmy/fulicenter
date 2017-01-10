@@ -1,10 +1,8 @@
 package cn.ucai.fulicenter.model.bean;
 
-/**
- * Created by Administrator on 2017/1/9 0009.
- */
+import java.io.Serializable;
 
-public class CategoryChildBean {
+public class CategoryChildBean implements Serializable {
 
     /**
      * id : 348
@@ -17,16 +15,6 @@ public class CategoryChildBean {
     private int parentId;
     private String name;
     private String imageUrl;
-
-    public CategoryChildBean() {
-    }
-
-    public CategoryChildBean(int id, int parentId, String name, String imageUrl) {
-        this.id = id;
-        this.parentId = parentId;
-        this.name = name;
-        this.imageUrl = imageUrl;
-    }
 
     public int getId() {
         return id;

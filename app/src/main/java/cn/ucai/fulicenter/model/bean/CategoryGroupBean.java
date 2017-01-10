@@ -1,10 +1,8 @@
 package cn.ucai.fulicenter.model.bean;
 
-/**
- * Created by Administrator on 2017/1/9 0009.
- */
+import java.io.Serializable;
 
-public class CategoryGroupBean {
+public class CategoryGroupBean implements Serializable {
 
     /**
      * id : 334
@@ -15,15 +13,6 @@ public class CategoryGroupBean {
     private int id;
     private String name;
     private String imageUrl;
-
-    public CategoryGroupBean() {
-    }
-
-    public CategoryGroupBean(int id, String name, String imageUrl) {
-        this.id = id;
-        this.name = name;
-        this.imageUrl = imageUrl;
-    }
 
     public int getId() {
         return id;
@@ -47,14 +36,5 @@ public class CategoryGroupBean {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
-    }
-
-    @Override
-    public String toString() {
-        return "CategoryGroupBean{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", imageUrl='" + imageUrl + '\'' +
-                '}';
     }
 }
