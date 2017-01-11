@@ -1,27 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/activity_main"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-
     <fragment
         android:id="@+id/layout_content"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="9"
         android:name="cn.ucai.fulicenter.controller.fragment.NewGoodsFragment"/>
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_alignParentBottom="true">
-
         <RadioGroup
             android:id="@+id/radioGroup"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+
             android:orientation="horizontal">
             <RadioButton
                 android:id="@+id/layout_new_goods"
@@ -73,6 +67,5 @@
                 android:checked="true"
                 android:gravity="center"/>
         </RadioGroup>
-    </LinearLayout>
 
-</RelativeLayout>
+</LinearLayout>

@@ -26,10 +26,13 @@ import cn.ucai.fulicenter.model.net.ModelNewGoods;
 import cn.ucai.fulicenter.model.net.OnCompleteListener;
 import cn.ucai.fulicenter.model.utils.ConvertUtils;
 import cn.ucai.fulicenter.model.utils.L;
+import cn.ucai.fulicenter.model.utils.SpaceItemDecoration;
 
 
 public class NewGoodsFragment extends Fragment {
-
+    public static final int ACTION_DOWN = 0;
+    public static final int ACTION_PULL_DOWN = 1;
+    public static final int ACTION_PULL_UP = 2;
 
     @BindView(R.id.tvRefresh)
     TextView tvRefresh;
@@ -43,7 +46,7 @@ public class NewGoodsFragment extends Fragment {
     ArrayList<NewGoodsBean> newGoodsList;
 
     IModelNewGoods model;
-    int pageId = 1;
+    int pageId;
 
     public NewGoodsFragment() {
 
@@ -55,18 +58,48 @@ public class NewGoodsFragment extends Fragment {
     }
 
     private void initData() {
+        pageId = 1;
+        downloadNewGoodsList(ACTION_DOWN,pageId);
+    }
+
+    private void downloadNewGoodsList(final int action, int pageId) {
         model.downData(getContext(), I.CAT_ID, pageId, new OnCompleteListener<NewGoodsBean[]>() {
             @Override
             public void onSuccess(NewGoodsBean[] result) {
                 if (result != null && result.length > 0) {
+                    mAdapter.setMore(true);
                     ArrayList<NewGoodsBean> list = ConvertUtils.array2List(result);
-                    Log.e("TAG", "list.size=="+list.size());
-                    mAdapter.initData(list);
+                    Log.e("TAG", "list.size==" + list.size());
+
+                    switch (action) {
+                        case ACTION_DOWN:
+                            mAdapter.initData(list);
+                            break;
+                        case ACTION_PULL_DOWN:
+                            swipeRefreshLayout.setRefreshing(false);
+                            tvRefresh.setVisibility(View.GONE);
+                            mAdapter.initData(list);
+                            break;
+                        case ACTION_PULL_UP:
+                            swipeRefreshLayout.setRefreshing(false);
+                            mAdapter.addData(list);
+                            break;
+                    }
+                } else {
+                    mAdapter.setMore(false);
+
+
+                }
+                if (!mAdapter.isMore()) {
+                    mAdapter.setFooter("没有数据可加载");
+                } else {
+                    mAdapter.setFooter("加载更多数据");
                 }
             }
 
             @Override
             public void onError(String error) {
+
                 L.e("TAG", "error==" + error);
             }
         });
@@ -83,6 +116,7 @@ public class NewGoodsFragment extends Fragment {
         mManager = new GridLayoutManager(getContext(), I.COLUM_NUM);
         recyclerView.setLayoutManager(mManager);
         recyclerView.setHasFixedSize(true); // 自适配
+        recyclerView.addItemDecoration(new SpaceItemDecoration(12));  // 设置每个控件之间的间距
         newGoodsList = new ArrayList<>();
         mAdapter = new NewGoodsAdapter(getContext(), newGoodsList);
         recyclerView.setAdapter(mAdapter);
@@ -96,7 +130,49 @@ public class NewGoodsFragment extends Fragment {
         initView();
         model = new ModelNewGoods();
         initData();
+        setListener();
         return layout;
+    }
+
+    private void setListener() {
+        setPullUpListener();
+        setPullDownListener();
+    }
+
+    private void setPullDownListener() {
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeRefreshLayout.setRefreshing(true);
+                tvRefresh.setVisibility(View.INVISIBLE);
+                pageId = 1;
+                downloadNewGoodsList(ACTION_PULL_DOWN,pageId);
+            }
+        });
+    }
+
+    private void setPullUpListener() {
+        recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+            int lastPosition ;
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+
+                if (newState == RecyclerView.SCROLL_STATE_IDLE
+                        && mAdapter.isMore()
+                        && lastPosition == mAdapter.getItemCount() - 1) {
+                    pageId ++;
+                    downloadNewGoodsList(ACTION_PULL_UP,pageId);
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                lastPosition= mManager.findLastVisibleItemPosition();
+            }
+        });
     }
 
 }
