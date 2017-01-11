@@ -8,6 +8,7 @@ import android.widget.RadioButton;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.ucai.fulicenter.R;
+import cn.ucai.fulicenter.controller.fragment.NewGoodsFragment;
 
 public class MainActivity extends AppCompatActivity {
     RadioButton rbNewGoods, rbBoutique, rbCart, rbCategory, rbPersonal;
@@ -31,6 +32,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         initRadioButton();
+
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.layout_content, new NewGoodsFragment())
+                .commit();
     }
 
     public void initRadioButton() {
