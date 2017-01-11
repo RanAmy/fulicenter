@@ -22,38 +22,52 @@ import cn.ucai.fulicenter.model.utils.ImageLoader;
 
 public class NewGoodsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     Context mContext;
-    ArrayList<NewGoodsBean> newGoodsList;
+    ArrayList<NewGoodsBean> mNewGoodsList;
 
-    public NewGoodsAdapter(Context mContext, ArrayList<NewGoodsBean> newGoodsList) {
+    //  此处传的List是在NewGoodsFragment中实例化的数据
+    public NewGoodsAdapter(Context mContext, ArrayList<NewGoodsBean> list) {
         this.mContext = mContext;
-        newGoodsList = new ArrayList<>();
-        newGoodsList.addAll(newGoodsList);
+        mNewGoodsList = new ArrayList<>();
+        mNewGoodsList.addAll(list);
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         RecyclerView.ViewHolder holder =
                 new NewGoodsViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_newgoods, parent, false));
-        return null;
+        return holder;
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         NewGoodsViewHolder newGoodsViewHolder;
         newGoodsViewHolder = (NewGoodsViewHolder) holder;
-        newGoodsViewHolder.tvGoodsName.setText(newGoodsList.get(position).getGoodsName());
-        newGoodsViewHolder.tvGoodsPrice.setText(newGoodsList.get(position).getCurrencyPrice());
-        ImageLoader.downloadImg(mContext,newGoodsViewHolder.ivImageView,newGoodsList.get(position).getGoodsThumb());
+        newGoodsViewHolder.tvGoodsName.setText(mNewGoodsList.get(position).getGoodsName());
+        newGoodsViewHolder.tvGoodsPrice.setText(mNewGoodsList.get(position).getCurrencyPrice());
+        ImageLoader.downloadImg(mContext,newGoodsViewHolder.ivImageView,mNewGoodsList.get(position).getGoodsThumb());
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mNewGoodsList.size();
     }
 
     @Override
     public int getItemViewType(int position) {
         return super.getItemViewType(position);
+    }
+
+    public void initData(ArrayList<NewGoodsBean> list) {
+        if (mNewGoodsList != null) {
+            this.mNewGoodsList.clear();
+        }
+        this.mNewGoodsList.addAll(list);
+        notifyDataSetChanged();
+    }
+
+    public void addAll(ArrayList<NewGoodsBean> list) {
+        this.mNewGoodsList.addAll(list);
+        notifyDataSetChanged();
     }
 
 
