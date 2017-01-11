@@ -4,12 +4,12 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <fragment
+    <RelativeLayout
         android:id="@+id/layout_content"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="9"
-        android:name="cn.ucai.fulicenter.controller.fragment.NewGoodsFragment"/>
+        android:layout_weight="9" />
+
         <RadioGroup
             android:id="@+id/radioGroup"
             android:layout_width="match_parent"
@@ -20,7 +20,7 @@
             <RadioButton
                 android:id="@+id/layout_new_goods"
                 android:drawableTop="@drawable/selector_menu_item_new_good"
-                style="@style/style_menu_item"
+                style="@style/menu_item_style"
                 android:button="@null"
                 android:text="新品"
                 android:textColor="@color/main_botton_text_color"
@@ -30,7 +30,7 @@
             <RadioButton
                 android:id="@+id/layout_boutique"
                 android:drawableTop="@drawable/selector_menu_item_boutique"
-                style="@style/style_menu_item"
+                style="@style/menu_item_style"
                 android:button="@null"
                 android:text="精选"
                 android:textColor="@color/main_botton_text_color"
@@ -40,7 +40,7 @@
             <RadioButton
                 android:id="@+id/layout_category"
                 android:drawableTop="@drawable/selector_menu_item_category"
-                style="@style/style_menu_item"
+                style="@style/menu_item_style"
                 android:button="@null"
                 android:text="分类"
                 android:textColor="@color/main_botton_text_color"
@@ -50,7 +50,7 @@
             <RadioButton
                 android:id="@+id/layout_cart"
                 android:drawableTop="@drawable/selector_menu_item_cart"
-                style="@style/style_menu_item"
+                style="@style/menu_item_style"
                 android:button="@null"
                 android:text="购物车"
                 android:textColor="@color/main_botton_text_color"
@@ -60,7 +60,7 @@
             <RadioButton
                 android:id="@+id/layout_personal"
                 android:drawableTop="@drawable/selector_menu_item_personal_center"
-                style="@style/style_menu_item"
+                style="@style/menu_item_style"
                 android:button="@null"
                 android:text="我"
                 android:textColor="@color/main_botton_text_color"

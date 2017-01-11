@@ -23,7 +23,6 @@
             android:layout_height="wrap_content">
         </android.support.v7.widget.RecyclerView>
 
-            <!--<include layout="@layout/layout_footer_title"/>-->
         </LinearLayout>
     </android.support.v4.widget.SwipeRefreshLayout>
 

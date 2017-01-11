@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/ivBoutique"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:layout_weight="3"
+        android:src="@drawable/xueren"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:layout_weight="2"
+        android:orientation="vertical">
+        <EditText
+            android:id="@+id/etName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="不一样的新装，不一样的美丽"
+            android:textColor="#f505a5"
+            android:textSize="18sp"
+            android:layout_toRightOf="@id/layout_boutique"
+            android:layout_marginTop="3dp"/>
+        <EditText
+            android:id="@+id/etTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="拯救头发，美丽新装"
+            android:textColor="#000"
+            android:textSize="18sp"
+            android:layout_toRightOf="@id/layout_boutique"
+            android:layout_marginTop="3sp"/>
+        <EditText
+            android:id="@+id/etDscription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="快速增长维护"
+            android:textSize="18sp"
+            android:textColor="#4b3308f4"
+            android:layout_toRightOf="@id/layout_boutique"
+            android:layout_marginTop="3dp"/>
+
+    </LinearLayout>
+</LinearLayout>
