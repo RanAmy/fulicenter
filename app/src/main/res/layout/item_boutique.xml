@@ -45,6 +45,5 @@
             android:textColor="#4b3308f4"
             android:layout_toRightOf="@id/layout_boutique"
             android:layout_marginTop="3dp"/>
-
     </LinearLayout>
 </LinearLayout>

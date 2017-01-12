@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -22,31 +21,9 @@ import cn.ucai.fulicenter.model.utils.ImageLoader;
  */
 
 public class BoutiqueAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    public static final int TYPE_FOOTER = 0;
-    public static final int TYPE_BOUTIQUE = 1;
-
     Context mContext;
     ArrayList<BoutiqueBean> mBoutiqueList;
 
-    String footer; // 判断页脚，是否还有数据可加载
-
-    boolean isMore; // 判断是否还有更多数据可加载
-
-    public boolean isMore() {
-        return isMore;
-    }
-
-    public void setMore(boolean more) {
-        isMore = more;
-    }
-
-    public String getFooter() {
-        return footer;
-    }
-
-    public void setFooter(String footer) {
-        this.footer = footer;
-    }
 
     //  此处传的List是在NewGoodsFragment中实例化的数据
     public BoutiqueAdapter(Context mContext, ArrayList<BoutiqueBean> mList) {
@@ -58,25 +35,13 @@ public class BoutiqueAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(mContext);
-        View layout;
-        if (viewType == TYPE_FOOTER) {
-            layout = View.inflate(mContext, R.layout.layout_footer_title, null);
-            return new FooterViewHolder(layout);
-        } else if (viewType == TYPE_BOUTIQUE) {
-            layout = inflater.inflate(R.layout.item_boutique, parent, false);
+        View layout
+             = inflater.inflate(R.layout.item_boutique, parent, false);
             return new BoutiqueViewHolder(layout);
-        }
-        return null;
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (getItemViewType(position) == TYPE_FOOTER) {
-            FooterViewHolder footerViewHolder = (FooterViewHolder) holder;
-            footerViewHolder.tvFooter.setText(getFooter());
-            return;  // 必须返回reture，否则会报下标越界异常
-        }
-
         BoutiqueBean boutique = mBoutiqueList.get(position);
         BoutiqueViewHolder BoutiqueViewHolder = (BoutiqueViewHolder) holder;
         BoutiqueViewHolder.etName.setText(boutique.getName());
@@ -87,16 +52,9 @@ public class BoutiqueAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public int getItemCount() {
-        return mBoutiqueList.size() + 1;
+        return mBoutiqueList.size();
     }
 
-    @Override
-    public int getItemViewType(int position) {
-        if (position == getItemCount() - 1) {
-            return TYPE_FOOTER;
-        }
-        return TYPE_BOUTIQUE;
-    }
 
     public void initData(ArrayList<BoutiqueBean> mList) {
         if (mBoutiqueList != null) {
@@ -110,19 +68,6 @@ public class BoutiqueAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         notifyDataSetChanged();
     }
 
-
-    /**
-     * 页脚的ViewHolder
-     */
-    static class FooterViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.tvFooter)
-        TextView tvFooter;
-
-        FooterViewHolder(View view) {
-            super(view);
-            ButterKnife.bind(this, view);
-        }
-    }
 
     /**
      * 精选的ViewHolder
