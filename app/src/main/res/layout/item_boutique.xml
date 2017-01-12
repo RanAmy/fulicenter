@@ -26,7 +26,8 @@
             android:textColor="#f505a5"
             android:textSize="18sp"
             android:layout_toRightOf="@id/layout_boutique"
-            android:layout_marginTop="3dp"/>
+            android:layout_marginTop="3dp"
+            android:editable="false"/>
         <EditText
             android:id="@+id/etTitle"
             android:layout_width="wrap_content"
@@ -35,7 +36,8 @@
             android:textColor="#000"
             android:textSize="18sp"
             android:layout_toRightOf="@id/layout_boutique"
-            android:layout_marginTop="3sp"/>
+            android:layout_marginTop="3sp"
+            android:editable="false"/>
         <EditText
             android:id="@+id/etDscription"
             android:layout_width="wrap_content"
@@ -44,6 +46,7 @@
             android:textSize="18sp"
             android:textColor="#4b3308f4"
             android:layout_toRightOf="@id/layout_boutique"
-            android:layout_marginTop="3dp"/>
+            android:layout_marginTop="3dp"
+            android:editable="false"/>
     </LinearLayout>
 </LinearLayout>

@@ -1,6 +1,7 @@
 package cn.ucai.fulicenter.controller.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,8 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.ucai.fulicenter.R;
+import cn.ucai.fulicenter.application.I;
+import cn.ucai.fulicenter.controller.activity.BoutiqueChildActivity;
 import cn.ucai.fulicenter.model.bean.BoutiqueBean;
 import cn.ucai.fulicenter.model.utils.ImageLoader;
 
@@ -41,13 +44,21 @@ public class BoutiqueAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         BoutiqueBean boutique = mBoutiqueList.get(position);
         BoutiqueViewHolder BoutiqueViewHolder = (BoutiqueViewHolder) holder;
         BoutiqueViewHolder.etName.setText(boutique.getName());
         BoutiqueViewHolder.etTitle.setText(boutique.getTitle());
         BoutiqueViewHolder.etDscription.setText(boutique.getDescription());
         ImageLoader.downloadImg(mContext, BoutiqueViewHolder.ivBoutique, mBoutiqueList.get(position).getImageurl());
+        //  点击精选首页的itemView
+        BoutiqueViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mContext.startActivity(new Intent(mContext, BoutiqueChildActivity.class)
+                        .putExtra(I.NewAndBoutiqueGoods.CAT_ID, mBoutiqueList.get(position).getId()));
+            }
+        });
     }
 
     @Override

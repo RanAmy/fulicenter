@@ -64,7 +64,8 @@ public class NewGoodsFragment extends Fragment {
     }
 
     private void downloadNewGoodsList(final int action, int pageId) {
-        model.downData(getContext(), I.CAT_ID, pageId, new OnCompleteListener<NewGoodsBean[]>() {
+        int catId = getActivity().getIntent().getIntExtra(I.NewAndBoutiqueGoods.CAT_ID, I.CAT_ID);
+        model.downData(getContext(),catId, pageId, new OnCompleteListener<NewGoodsBean[]>() {
             @Override
             public void onSuccess(NewGoodsBean[] result) {
                 if (result != null && result.length > 0) {
@@ -88,13 +89,11 @@ public class NewGoodsFragment extends Fragment {
                     }
                 } else {
                     mAdapter.setMore(false);
-
-
                 }
-                if (!mAdapter.isMore()) {
-                    mAdapter.setFooter("没有数据可加载");
-                } else {
+                if (mAdapter.isMore()) {
                     mAdapter.setFooter("加载更多数据");
+                } else {
+                    mAdapter.setFooter("没有数据可加载");
                 }
             }
 
