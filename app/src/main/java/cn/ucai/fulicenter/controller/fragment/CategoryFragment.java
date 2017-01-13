@@ -64,14 +64,16 @@ public class CategoryFragment extends Fragment {
         model.downData(getContext(), new OnCompleteListener<CategoryGroupBean[]>() {
             @Override
             public void onSuccess(CategoryGroupBean[] result) {
-                Log.e("main", "=============执行到Category"+result);
                 if (result != null) {
                     initView(true);
                     ArrayList<CategoryGroupBean> list = ConvertUtils.array2List(result);
                     mGroupBean.addAll(list);
                     for (int i=0;i<list.size();i++) {
-//                        mChildBean.addAll(new ArrayList<ArrayList<CategoryChildBean>>());
-                        downloadChildData(list.get(i).getId());
+                        //  注意你要使用的方法：是add方法，还是addAll方法
+                        mChildBean.add(new ArrayList<CategoryChildBean>());
+                        //  downloadChildData方法中添加一个参数 i ，
+                        //  目的是将group和child的数据两者相对应
+                        downloadChildData(list.get(i).getId(),i);
                     }
                 } else {
                     initView(false);
@@ -85,22 +87,17 @@ public class CategoryFragment extends Fragment {
         });
     }
 
-    private void downloadChildData(int id) {
-        Log.e("main", "=============downloadChildData"+id);
+    private void downloadChildData(int id, final int index) {
         model.downData(getContext(), id, new OnCompleteListener<CategoryChildBean[]>() {
             @Override
             public void onSuccess(CategoryChildBean[] result) {
-                Log.e("main", "=============downloadChildData");
                 groupCount++;
                 if (result != null) {
-                    Log.e("main", "=============downloadChildData...............");
                     ArrayList<CategoryChildBean> list = ConvertUtils.array2List(result);
-                    mChildBean.add(list);
-//                    mChildBean.set(index, list);
+//                    mChildBean.add(list);
+                    mChildBean.set(index, list);
                 }
-                Log.e("main", "=============downloadChildData??????????????????"+groupCount);
                 if (groupCount == mGroupBean.size()) {
-                    Log.e("main", "=============downloadChildData??????????????????"+groupCount);
                     mAdapter.initData(mGroupBean, mChildBean);
                 }
                 Log.e(TAG, "groupCount=" + groupCount);
