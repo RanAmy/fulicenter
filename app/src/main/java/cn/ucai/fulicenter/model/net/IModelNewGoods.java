@@ -10,5 +10,5 @@ import cn.ucai.fulicenter.model.utils.OkHttpUtils;
  */
 
 public interface IModelNewGoods {
-    void downData(Context context, int catId, int pageId, OkHttpUtils.OnCompleteListener<NewGoodsBean[]> listener);
+    void downData(Context context,int catId, int pageId, OkHttpUtils.OnCompleteListener<NewGoodsBean[]> listener);
 }

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -11,6 +12,7 @@ import butterknife.OnClick;
 import cn.ucai.fulicenter.R;
 import cn.ucai.fulicenter.application.I;
 import cn.ucai.fulicenter.controller.fragment.NewGoodsFragment;
+import cn.ucai.fulicenter.model.utils.MFGT;
 
 public class CategoryChildActivity extends AppCompatActivity {
     NewGoodsFragment mNewGoodsFragment;
@@ -19,6 +21,8 @@ public class CategoryChildActivity extends AppCompatActivity {
     Button btnSortPrice;
     @BindView(R.id.btn_sort_addtime)
     Button btnSortAddtime;
+    @BindView(R.id.iv_back)
+    ImageView ivBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,5 +45,10 @@ public class CategoryChildActivity extends AppCompatActivity {
                 mNewGoodsFragment.sortGoods(I.SORT_BY_ADDTIME_ASC);
                 break;
         }
+    }
+
+    @OnClick(R.id.iv_back)
+    public void onClick() {
+        MFGT.finish(this);
     }
 }
