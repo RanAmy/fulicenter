@@ -17,6 +17,9 @@ import cn.ucai.fulicenter.model.utils.MFGT;
 public class CategoryChildActivity extends AppCompatActivity {
     NewGoodsFragment mNewGoodsFragment;
 
+    boolean priceAsc = false;
+    boolean addTimeAsc = false;
+
     @BindView(R.id.btn_sort_price)
     Button btnSortPrice;
     @BindView(R.id.btn_sort_addtime)
@@ -37,14 +40,26 @@ public class CategoryChildActivity extends AppCompatActivity {
 
     @OnClick({R.id.btn_sort_price, R.id.btn_sort_addtime})
     public void onClick(View view) {
+        int sortBy = I.SORT_BY_ADDTIME_ASC;
         switch (view.getId()) {
             case R.id.btn_sort_price:
-                mNewGoodsFragment.sortGoods(I.SORT_BY_PRICE_ASC);
+                if (priceAsc) {
+                    sortBy = I.SORT_BY_PRICE_ASC;
+                } else {
+                    sortBy = I.SORT_BY_PRICE_DESC;
+                }
+                priceAsc =! priceAsc;
                 break;
             case R.id.btn_sort_addtime:
-                mNewGoodsFragment.sortGoods(I.SORT_BY_ADDTIME_ASC);
+                if (addTimeAsc) {
+                    sortBy = I.SORT_BY_ADDTIME_ASC;
+                } else {
+                    sortBy = I.SORT_BY_ADDTIME_DESC;
+                }
+                addTimeAsc = !addTimeAsc;
                 break;
         }
+        mNewGoodsFragment.sortGoods(sortBy);
     }
 
     @OnClick(R.id.iv_back)
