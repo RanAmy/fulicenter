@@ -177,4 +177,12 @@ public class NewGoodsFragment extends Fragment {
         });
     }
 
+    /**
+     *  分类二级页面中 商品排序方法
+     * @param sortBy
+     */
+    public void sortGoods(int sortBy) {
+        mAdapter.sortGoods(sortBy);
+    }
+
 }
