@@ -15,7 +15,7 @@ public class ModelGoodsDetails implements IModelGoodsDetails {
     @Override
     public void downData(Context context, int goodsId, OkHttpUtils.OnCompleteListener<GoodsDetailsBean> listener) {
         OkHttpUtils<GoodsDetailsBean> utils = new OkHttpUtils<>(context);
-        utils.setRequestUrl(I.REQUEST_FIND_GOOD_DETAILS)
+        utils.setRequestUrl(I.REQUEST_FIND_GOODS_DETAILS)
                 .addParam(I.Goods.KEY_GOODS_ID,String.valueOf(goodsId))
                 .targetClass(GoodsDetailsBean.class)
                 .execute(listener);
