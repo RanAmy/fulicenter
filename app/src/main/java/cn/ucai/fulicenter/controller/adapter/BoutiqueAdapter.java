@@ -41,7 +41,7 @@ public class BoutiqueAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(mContext);
         View layout
-             = inflater.inflate(R.layout.item_boutique, parent, false);
+             = inflater.inflate(R.layout.item_boutique, parent,false);
             return new BoutiqueViewHolder(layout);
     }
 
