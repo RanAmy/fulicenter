@@ -54,6 +54,8 @@ public class CategoryFragment extends Fragment {
         ButterKnife.bind(this, layout);
         mAdapter = new CategoryAdapter(getContext(), mGroupBean, mChildBean);
         elvCategory.setAdapter(mAdapter);
+        //  取消分类页面自带的扩展按钮
+        elvCategory.setGroupIndicator(null);
         initView(false);
         initData();
         return layout;
