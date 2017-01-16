@@ -100,7 +100,6 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onSuccess(String s) {
                 if (s != null) {
-
                     Result result = ResultUtils.getResultFromJson(s, Result.class);
                     Log.e(TAG, "result=" + result);
                     if (result != null) {
