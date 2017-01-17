@@ -11,12 +11,11 @@ public class SharePreferenceUtils {
     private static final String SHARE_NAME = "saveUserInfo";
     private static final String SHARE_KEY_USER_NAME = "share_key_user_name";
     private static SharePreferenceUtils instance;
-    private static SharedPreferences preferences;
     private static SharedPreferences mSharePreferences;
     private  static SharedPreferences.Editor mEditor;
 
     public SharePreferenceUtils(Context context) {
-        preferences = context.getSharedPreferences(SHARE_NAME, Context.MODE_PRIVATE);
+        mSharePreferences = context.getSharedPreferences(SHARE_NAME, Context.MODE_PRIVATE);
         mEditor = mSharePreferences.edit();
     }
 

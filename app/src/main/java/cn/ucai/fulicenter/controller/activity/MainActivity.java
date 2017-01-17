@@ -17,7 +17,7 @@ import cn.ucai.fulicenter.controller.fragment.NewGoodsFragment;
 import cn.ucai.fulicenter.model.utils.MFGT;
 
 public class MainActivity extends AppCompatActivity {
-    RadioButton[] rbs = new RadioButton[4];
+    RadioButton[] rbs = new RadioButton[5];
 
     int index, currentIndex;  //  index:表示你以前选择的  currentIndex：表示当前要选择的
 
@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         rbs[1] = layoutBoutique;
         rbs[2] = layoutCategory;
         rbs[3] = layoutCart;
+        rbs[4] = layoutPersonal;
     }
 
     public void onCheckedChange(View view) {

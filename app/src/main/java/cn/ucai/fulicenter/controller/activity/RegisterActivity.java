@@ -64,10 +64,10 @@ public class RegisterActivity extends AppCompatActivity {
      * 免费注册
      */
     private void checkInput() {
-        String username = etUserName.getText().toString();
-        String usernick = etUserNick.getText().toString();
-        String password = etPassword.getText().toString();
-        String confirm = etQuerenPassword.getText().toString();
+        String username = etUserName.getText().toString().trim();
+        String usernick = etUserNick.getText().toString().trim();
+        String password = etPassword.getText().toString().trim();
+        String confirm = etQuerenPassword.getText().toString().trim();
         if (TextUtils.isEmpty(username)) {
             etUserName.setError(getResources().getString(R.string.user_name_connot_be_empty));
             etUserName.requestFocus();
@@ -108,16 +108,17 @@ public class RegisterActivity extends AppCompatActivity {
                             CommonUtils.showLongToast(R.string.register_success);
                             MFGT.finish(RegisterActivity.this);
                         } else {  //  register fail
-                            CommonUtils.showLongToast(R.string.register_fail);
+                            CommonUtils.showLongToast(R.string.register_fail_exists);
                         }
                     }
                     dialog.dismiss();
                 }
             }
 
-            @Override
+            @Override   //  注册失败
             public void onError(String error) {
-
+                dialog.dismiss();
+                CommonUtils.showLongToast(error);
             }
         });
     }
