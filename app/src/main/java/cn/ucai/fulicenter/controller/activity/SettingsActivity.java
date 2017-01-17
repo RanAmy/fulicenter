@@ -2,6 +2,7 @@ package cn.ucai.fulicenter.controller.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -30,7 +31,7 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         ButterKnife.bind(this);
-        DisplayUtils.initBackWithTitle(this,"设置");
+        DisplayUtils.initBackWithTitle(this, "设置");
         initData();
     }
 
@@ -56,5 +57,13 @@ public class SettingsActivity extends AppCompatActivity {
         SharePreferenceUtils.getInstance(this).removeUser();
         MFGT.gotoLogin(this);
         finish(); //  回到个人中心界面，而不是Settings界面
+    }
+
+    @OnClick(R.id.tv_user_profile_nick)
+    public void updateNick() {
+        String usernick = tvUserProfileNick.getText().toString().trim();
+        if (TextUtils.isEmpty(usernick)) {
+
+        }
     }
 }
