@@ -86,8 +86,8 @@ public class LoginActivity extends AppCompatActivity {
         model.login(this, username, password, new OnCompleteListener<String>() {
             @Override
             public void onSuccess(String s) {
-                if (s != null) {
-                    Result result = ResultUtils.getResultFromJson(s, Result.class);
+                if (s != null) {  //  因为数据库中已经添加了用户了，所以要使用User.class,而不是result.class
+                    Result result = ResultUtils.getResultFromJson(s, User.class);
                     Log.e(TAG, "result=" + result);
                     if (result != null) {
                         if (result.isRetMsg()) {
@@ -97,8 +97,9 @@ public class LoginActivity extends AppCompatActivity {
                             if (saveUser) {
                                 SharePreferenceUtils.getInstance(LoginActivity.this).saveUser(user.getMuserName());
                                 FuLiCenterApplication.setUser(user);
+                                setResult(RESULT_OK);
+                                MFGT.finish(LoginActivity.this);
                             }
-                            MFGT.finish(LoginActivity.this);
                         } else {
                             if (result.getRetCode() == I.MSG_LOGIN_UNKNOW_USER) {
                                 CommonUtils.showLongToast(getString(R.string.login_fail_unknow_user));

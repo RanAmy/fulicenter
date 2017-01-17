@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import cn.ucai.fulicenter.R;
 import cn.ucai.fulicenter.application.FuLiCenterApplication;
 import cn.ucai.fulicenter.model.bean.User;
@@ -27,6 +28,8 @@ public class PersonalFragment extends Fragment {
     ImageView ivUserAvatar;
     @BindView(R.id.tv_user_name)
     TextView tvUserName;
+    @BindView(R.id.tv_center_settings)
+    TextView tvCenterSettings;
 
     public PersonalFragment() {
 
@@ -52,9 +55,20 @@ public class PersonalFragment extends Fragment {
     }
 
     private void loadUserInfo(User user) {
-        ImageLoader.downloadImg(getContext(), ivUserAvatar, user.getAvaterPath());
+//        ImageLoader.downloadImg(getContext(), ivUserAvatar, user.getAvaterPath());
+        ImageLoader.setAvatar(ImageLoader.getAvatarUrl(user), getContext(), ivUserAvatar);
         tvUserName.setText(user.getMuserNick());
     }
 
 
+    @OnClick({R.id.tv_center_settings,R.id.center_user_info})
+    public void settings() {
+        MFGT.gotoSettings(getActivity());
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        initData();
+    }
 }

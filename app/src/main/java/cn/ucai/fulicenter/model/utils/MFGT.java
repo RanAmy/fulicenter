@@ -3,6 +3,7 @@ package cn.ucai.fulicenter.model.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.FragmentActivity;
 
 import java.util.ArrayList;
 
@@ -14,6 +15,7 @@ import cn.ucai.fulicenter.controller.activity.GoodsDetailsActivity;
 import cn.ucai.fulicenter.controller.activity.LoginActivity;
 import cn.ucai.fulicenter.controller.activity.MainActivity;
 import cn.ucai.fulicenter.controller.activity.RegisterActivity;
+import cn.ucai.fulicenter.controller.activity.SettingsActivity;
 import cn.ucai.fulicenter.model.bean.BoutiqueBean;
 import cn.ucai.fulicenter.model.bean.CategoryChildBean;
 
@@ -60,10 +62,14 @@ public class MFGT {
     }
 
     public static void gotoLogin(Activity context) {
-        startActivity(context, LoginActivity.class);
+        context.startActivityForResult(new Intent(context,LoginActivity.class),I.REQUEST_CODE_LOGIN);
     }
 
     public static void gotoRegister(Activity context) {
         startActivity(context, RegisterActivity.class);
+    }
+
+    public static void gotoSettings(Activity activity) {
+        startActivity(activity, SettingsActivity.class);
     }
 }
