@@ -102,11 +102,15 @@ public class MainActivity extends AppCompatActivity {
         super.onRestart();
         L.e(TAG, "onResume,currentIndex=" + currentIndex + ",index"
                 + index + ",user=" + FuLiCenterApplication.getUser());
+        if (index == 4 && FuLiCenterApplication.getUser() == null) {
+            index = 0;
+        }
         setRadioStatus();
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.i(TAG, "onActivityResult,resultCode=" + resultCode + ",requestCode=" + requestCode);
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == I.REQUEST_CODE_LOGIN) {
             index = 4;

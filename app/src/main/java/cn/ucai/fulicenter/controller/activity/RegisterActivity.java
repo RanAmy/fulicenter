@@ -16,6 +16,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.ucai.fulicenter.R;
 import cn.ucai.fulicenter.model.bean.Result;
+import cn.ucai.fulicenter.model.net.DisplayUtils;
 import cn.ucai.fulicenter.model.net.IModelUser;
 import cn.ucai.fulicenter.model.net.ModelUser;
 import cn.ucai.fulicenter.model.net.OnCompleteListener;
@@ -45,9 +46,10 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         ButterKnife.bind(this);
+//        DisplayUtils.initBackWithTitle(this,"用户注册");
     }
 
-    @OnClick({R.id.iv_register_back, R.id.btn_free_register})
+  @OnClick({R.id.iv_register_back, R.id.btn_free_register})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_register_back:
@@ -60,10 +62,12 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
+//    @OnClick (R.id.btn_free_register)
+
     /**
      * 免费注册
      */
-    private void checkInput() {
+    public void checkInput() {
         String username = etUserName.getText().toString().trim();
         String usernick = etUserNick.getText().toString().trim();
         String password = etPassword.getText().toString().trim();
