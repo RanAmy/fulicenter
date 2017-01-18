@@ -1,8 +1,10 @@
 package cn.ucai.fulicenter.controller.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,6 +13,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.ucai.fulicenter.R;
 import cn.ucai.fulicenter.application.FuLiCenterApplication;
+import cn.ucai.fulicenter.application.I;
 import cn.ucai.fulicenter.model.bean.User;
 import cn.ucai.fulicenter.model.net.DisplayUtils;
 import cn.ucai.fulicenter.model.net.SharePreferenceUtils;
@@ -18,6 +21,7 @@ import cn.ucai.fulicenter.model.utils.ImageLoader;
 import cn.ucai.fulicenter.model.utils.MFGT;
 
 public class SettingsActivity extends AppCompatActivity {
+    private static final String TAG = SettingsActivity.class.getSimpleName();
 
     @BindView(R.id.iv_user_profile_avatar)
     ImageView ivUserProfileAvatar;
@@ -61,9 +65,18 @@ public class SettingsActivity extends AppCompatActivity {
 
     @OnClick(R.id.tv_user_profile_nick)
     public void updateNick() {
-        String usernick = tvUserProfileNick.getText().toString().trim();
-        if (TextUtils.isEmpty(usernick)) {
+        MFGT.gotoUpdateNick(this);
+    }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.e(TAG, "onActivityResult,requestCode=" + requestCode
+                + "resultOk="+RESULT_OK
+                +",requestCode=" + requestCode
+                +",user="+FuLiCenterApplication.getUser());
+        if (requestCode == RESULT_OK && requestCode == I.REQUEST_CODE_NICK) {
+            tvUserProfileNick.setText(FuLiCenterApplication.getUser().getMuserNick());
         }
     }
 }

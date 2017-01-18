@@ -71,4 +71,5 @@ public class PersonalFragment extends Fragment {
         super.onResume();
         initData();
     }
+
 }
