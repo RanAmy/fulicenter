@@ -4,6 +4,7 @@ import android.content.Context;
 
 import cn.ucai.fulicenter.application.I;
 import cn.ucai.fulicenter.model.bean.GoodsDetailsBean;
+import cn.ucai.fulicenter.model.bean.MessageBean;
 import cn.ucai.fulicenter.model.utils.OkHttpUtils;
 
 /**
@@ -18,6 +19,16 @@ public class ModelGoodsDetails implements IModelGoodsDetails {
         utils.setRequestUrl(I.REQUEST_FIND_GOODS_DETAILS)
                 .addParam(I.Goods.KEY_GOODS_ID,String.valueOf(goodsId))
                 .targetClass(GoodsDetailsBean.class)
+                .execute(listener);
+    }
+
+    @Override
+    public void isCollect(Context context, int goodsId, String username, OnCompleteListener<MessageBean> listener) {
+        OkHttpUtils<MessageBean> utils = new OkHttpUtils<>(context);
+        utils.setRequestUrl(I.REQUEST_IS_COLLECT)
+                .addParam(I.Goods.KEY_GOODS_ID, String.valueOf(goodsId))
+                .addParam(I.Collect.USER_NAME, username)
+                .targetClass(MessageBean.class)
                 .execute(listener);
     }
 }
