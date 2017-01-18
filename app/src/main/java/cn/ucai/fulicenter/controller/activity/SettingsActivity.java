@@ -102,7 +102,7 @@ public class SettingsActivity extends AppCompatActivity {
                 + "resultOk=" + RESULT_OK
                 + ",requestCode=" + requestCode
                 + ",user=" + FuLiCenterApplication.getUser());
-        if (requestCode != RESULT_OK) {
+        if (resultCode != RESULT_OK) {
             return;
         }
         if(requestCode == I.REQUEST_CODE_NICK) {

@@ -4,6 +4,7 @@ import android.content.Context;
 
 import java.io.File;
 
+import cn.ucai.fulicenter.model.bean.MessageBean;
 import cn.ucai.fulicenter.model.utils.OkHttpUtils;
 
 /**
@@ -18,4 +19,6 @@ public interface IModelUser {
     void updateNick(Context context, String username, String usernick, OnCompleteListener<String> listener);
 
     void uploadAvatar(Context context, String username, File file, OnCompleteListener<String> listener);
+
+    void collectCount(Context context, String username, OnCompleteListener<MessageBean> listener);
 }
