@@ -6,14 +6,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import cn.ucai.fulicenter.R;
+import cn.ucai.fulicenter.application.FuLiCenterApplication;
+import cn.ucai.fulicenter.application.I;
 import cn.ucai.fulicenter.model.bean.CollectBean;
+import cn.ucai.fulicenter.model.bean.MessageBean;
+import cn.ucai.fulicenter.model.bean.User;
+import cn.ucai.fulicenter.model.net.IModelGoodsDetails;
+import cn.ucai.fulicenter.model.net.IModelNewGoods;
+import cn.ucai.fulicenter.model.net.ModelGoodsDetails;
+import cn.ucai.fulicenter.model.net.ModelNewGoods;
+import cn.ucai.fulicenter.model.net.OnCompleteListener;
 import cn.ucai.fulicenter.model.utils.ImageLoader;
 import cn.ucai.fulicenter.model.utils.MFGT;
 
@@ -24,6 +35,8 @@ import cn.ucai.fulicenter.model.utils.MFGT;
 public class CollectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public static final int TYPE_FOOTER = 0;
     public static final int TYPE_NEWGOODS = 1;
+    IModelGoodsDetails model;
+    User user;
 
     Context mContext;
     ArrayList<CollectBean> mNewGoodsList;
@@ -54,6 +67,8 @@ public class CollectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         this.mContext = mContext;
         mNewGoodsList = new ArrayList<>();
         mNewGoodsList.addAll(list);
+        model = new ModelGoodsDetails();
+        user = FuLiCenterApplication.getUser();
     }
 
     @Override
@@ -73,21 +88,14 @@ public class CollectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         if (getItemViewType(position) == TYPE_FOOTER) {
-            FooterViewHolder footerViewHolder = (FooterViewHolder) holder;
-            footerViewHolder.tvFooter.setText(getFooter());
+            FooterViewHolder vh = (FooterViewHolder) holder;
+            vh.tvFooter.setText(getFooter());
             return;  // 必须返回reture，否则会报下标越界异常
         }
 
         CollectBean newGoods = mNewGoodsList.get(position);
-        CollectViewHolder CollectViewHolder = (CollectViewHolder) holder;
-        CollectViewHolder.ivGoodsName.setText(newGoods.getGoodsName());
-        ImageLoader.downloadImg(mContext, CollectViewHolder.ivGoodsThumb, mNewGoodsList.get(position).getGoodsThumb());
-        CollectViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MFGT.gotoGoodsDetail(mContext, mNewGoodsList.get(position).getGoodsId());
-            }
-        });
+        CollectViewHolder vh = (CollectViewHolder) holder;
+        vh.bind(position);
     }
 
     @Override
@@ -114,7 +122,7 @@ public class CollectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         this.mNewGoodsList.addAll(list);
         notifyDataSetChanged();
     }
-    
+
 
     /**
      * 页脚的ViewHolder
@@ -129,17 +137,51 @@ public class CollectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         }
     }
 
-    static class CollectViewHolder extends RecyclerView.ViewHolder{
+    class CollectViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.ivGoodsThumb)
         ImageView ivGoodsThumb;
         @BindView(R.id.ivGoodsName)
         TextView ivGoodsName;
         @BindView(R.id.iv_collect_delete)
         ImageView ivCollectDelete;
+        @BindView(R.id.layout_goods)
+        RelativeLayout layoutGoods;
+
+        int itemPosition;
 
         CollectViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
+        }
+
+        public void bind(final int position) {
+            ivGoodsName.setText(mNewGoodsList.get(position).getGoodsName());
+            ImageLoader.downloadImg(mContext, ivGoodsThumb, mNewGoodsList.get(position).getGoodsThumb());
+            itemPosition = position;
+        }
+
+        @OnClick(R.id.layout_goods)
+        public void details() {
+            MFGT.gotoGoodsDetail(mContext, mNewGoodsList.get(itemPosition).getGoodsId());
+        }
+
+        @OnClick(R.id.iv_collect_delete)
+        public void delCollect() {
+            model.setCollect(mContext, mNewGoodsList.get(itemPosition).getGoodsId(), user.getMuserName()
+                    , I.ACTION_DELETE_COLLECT, new OnCompleteListener<MessageBean>() {
+                        @Override
+                        public void onSuccess(MessageBean result) {
+                            if (result != null && result.isSuccess()) {
+                                mNewGoodsList.remove(itemPosition);
+                                notifyDataSetChanged();
+                            }
+                        }
+
+                        @Override
+                        public void onError(String error) {
+
+                        }
+                    });
         }
     }
 }
