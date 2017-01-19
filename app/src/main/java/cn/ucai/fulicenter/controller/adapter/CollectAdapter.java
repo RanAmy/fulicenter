@@ -61,6 +61,13 @@ public class CollectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         this.footer = footer;
     }
 
+    public void removeItem(int goodsId) {
+        if (goodsId != 0) {
+            mNewGoodsList.remove(new CollectBean(goodsId));
+            notifyDataSetChanged();
+        }
+    }
+
 
     //  此处传的List是在NewGoodsFragment中实例化的数据
     public CollectAdapter(Context mContext, ArrayList<CollectBean> list) {
