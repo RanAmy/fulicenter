@@ -122,14 +122,12 @@ public class ModelUser implements IModelUser {
 
     @Override
     public void updataCart(Context context, int action, String username, int goodsId, int count,int cartId,OnCompleteListener<MessageBean> listener) {
-        if (FuLiCenterApplication.getMyCartList().containsKey(goodsId)) {
-            if (action == I.ACTION_CART_DEL) {
-                delCart(context, cartId, listener);
-            } else {
-             updateCart(context,cartId,count,listener);
-            }
-        } else {
+        if (action == I.ACTION_CART_ADD) {
             addCart(context,username,goodsId,1,listener);
+        }else if (action == I.ACTION_CART_DEL) {
+            delCart(context, cartId, listener);
+        }else {
+            updateCart(context, cartId, count, listener);
         }
     }
 

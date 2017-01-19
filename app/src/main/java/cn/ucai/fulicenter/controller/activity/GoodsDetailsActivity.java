@@ -207,7 +207,6 @@ public class GoodsDetailsActivity extends AppCompatActivity {
             @Override
             public void onSuccess(MessageBean result) {
                 if (result != null && result.isSuccess()) {
-                    FuLiCenterApplication.getMyCartList().put(goodsId, null);
                     CommonUtils.showLongToast(R.string.add_goods_success);
                 }
             }
