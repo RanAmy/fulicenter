@@ -122,7 +122,8 @@ public class SettingsActivity extends AppCompatActivity {
         File file = null;
         file = new File(String.valueOf(OnSetAvatarListener.getAvatarFile(this,
                 OnSetAvatarListener.getAvatarPath(this,
-                        "/" + user.getMuserName() + user.getMavatarSuffix()))));
+                                I.AVATAR_TYPE_USER_PATH + "/"
+                                + user.getMuserName() + user.getMavatarSuffix()))));
         L.e(TAG,"file="+file.getAbsolutePath());
         model = new ModelUser();
         model.uploadAvatar(this,
