@@ -14,6 +14,7 @@ import cn.ucai.fulicenter.R;
 import cn.ucai.fulicenter.application.FuLiCenterApplication;
 import cn.ucai.fulicenter.application.I;
 import cn.ucai.fulicenter.controller.fragment.BoutiqueFragment;
+import cn.ucai.fulicenter.controller.fragment.CartFragment;
 import cn.ucai.fulicenter.controller.fragment.CategoryFragment;
 import cn.ucai.fulicenter.controller.fragment.NewGoodsFragment;
 import cn.ucai.fulicenter.controller.fragment.PersonalFragment;
@@ -70,7 +71,12 @@ public class MainActivity extends AppCompatActivity {
                 transaction.replace(R.id.layout_content, new CategoryFragment()).commit();
                 break;
             case R.id.layout_cart:
-                index = 3;
+                if (FuLiCenterApplication.getUser() == null) {
+                    MFGT.gotoLogin(this,I.REQUEST_CODE_LOGIN_FROM_CART);
+                } else {
+                    index = 3;
+                    transaction.replace(R.id.layout_content, new CartFragment()).commit();
+                }
                 break;
             case R.id.layout_personal:
                 if (FuLiCenterApplication.getUser() == null) {
@@ -112,8 +118,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.i(TAG, "onActivityResult,resultCode=" + resultCode + ",requestCode=" + requestCode);
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && requestCode == I.REQUEST_CODE_LOGIN) {
-            index = 4;
+        if (resultCode == RESULT_OK) {
+            if(requestCode == I.REQUEST_CODE_LOGIN) {
+                index = 4;
+            }
+            if (requestCode == I.REQUEST_CODE_LOGIN_FROM_CART) {
+                index = 3;
+            }
             setRadioStatus();
         }
     }
