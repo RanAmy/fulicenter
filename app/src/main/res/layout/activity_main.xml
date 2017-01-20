@@ -34,7 +34,7 @@
                 android:button="@null"
                 android:text="精选"
                 android:textColor="@color/main_botton_text_color"
-                android:checked="true"
+                android:checked="false"
                 android:gravity="center"/>
 
             <RadioButton
@@ -44,7 +44,7 @@
                 android:button="@null"
                 android:text="分类"
                 android:textColor="@color/main_botton_text_color"
-                android:checked="true"
+                android:checked="false"
                 android:gravity="center"/>
 
             <RadioButton
@@ -54,7 +54,7 @@
                 android:button="@null"
                 android:text="购物车"
                 android:textColor="@color/main_botton_text_color"
-                android:checked="true"
+                android:checked="false"
                 android:gravity="center"/>
 
             <RadioButton
@@ -64,7 +64,7 @@
                 android:button="@null"
                 android:text="我"
                 android:textColor="@color/main_botton_text_color"
-                android:checked="true"
+                android:checked="false"
                 android:gravity="center"/>
         </RadioGroup>
 

@@ -20,7 +20,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.ucai.fulicenter.R;
 import cn.ucai.fulicenter.application.FuLiCenterApplication;
-import cn.ucai.fulicenter.controller.adapter.BoutiqueAdapter;
+import cn.ucai.fulicenter.controller.adapter.CartAdapter;
 import cn.ucai.fulicenter.model.bean.BoutiqueBean;
 import cn.ucai.fulicenter.model.bean.CartBean;
 import cn.ucai.fulicenter.model.bean.User;
@@ -50,8 +50,8 @@ public class CartFragment extends Fragment {
 
 
     LinearLayoutManager mManager;
-    BoutiqueAdapter mAdapter;
-    ArrayList<BoutiqueBean> boutiqueList;
+    CartAdapter mAdapter;
+    ArrayList<CartBean> cartList;
 
     IModelUser model;
     int pageId;
@@ -86,12 +86,12 @@ public class CartFragment extends Fragment {
                     Log.e("TAG", "mList.size==" + mList.size());
                     switch (action) {
                         case ACTION_DOWN:
-//                            mAdapter.initData(mList);
+                            mAdapter.initData(mList);
                             break;
                         case ACTION_PULL_DOWN:
                             swipeRefreshLayout.setRefreshing(false);
                             tvRefresh.setVisibility(View.GONE);
-//                            mAdapter.initData(mList);
+                            mAdapter.initData(mList);
                             break;
                     }
                 } else {
@@ -122,8 +122,8 @@ public class CartFragment extends Fragment {
         recyclerView.setLayoutManager(mManager);
         recyclerView.setHasFixedSize(true); // 自适配
         recyclerView.addItemDecoration(new SpaceItemDecoration(12));  // 设置每个控件之间的间距
-        boutiqueList = new ArrayList<>();
-        mAdapter = new BoutiqueAdapter(getContext(), boutiqueList);
+        cartList = new ArrayList<>();
+        mAdapter = new CartAdapter(getContext(), cartList);
         recyclerView.setAdapter(mAdapter);
         swipeRefreshLayout.setVisibility(View.GONE);
         tvNoMore.setVisibility(View.VISIBLE);

@@ -44,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         initRadioButton();
+        NewGoodsFragment goodFragment=new NewGoodsFragment();
+        getSupportFragmentManager().beginTransaction().add(R.id.layout_content, goodFragment).show(goodFragment).commit();
     }
 
     public void initRadioButton() {
