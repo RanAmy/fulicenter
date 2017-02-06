@@ -35,6 +35,7 @@ import cn.ucai.fulicenter.model.net.OnCompleteListener;
 import cn.ucai.fulicenter.model.utils.CommonUtils;
 import cn.ucai.fulicenter.model.utils.ConvertUtils;
 import cn.ucai.fulicenter.model.utils.L;
+import cn.ucai.fulicenter.model.utils.MFGT;
 import cn.ucai.fulicenter.model.utils.SpaceItemDecoration;
 
 /**
@@ -67,6 +68,9 @@ public class CartFragment extends Fragment {
     @BindView(R.id.tv_cart_save_price)
     TextView tvCartSavePrice;
     UpdateCartReceiver mReceiver;
+
+    int sumPrice = 0;
+    int payPrice = 0;
 
     public CartFragment() {
 
@@ -187,7 +191,8 @@ public class CartFragment extends Fragment {
     }
 
     private void setPrice() {
-        int sumPrice = 0;
+        sumPrice = 0;
+        payPrice = 0;
         int savePrice = 0;
         if (cartList != null && cartList.size() > 0) {
             for (CartBean cart : cartList) {
@@ -201,6 +206,7 @@ public class CartFragment extends Fragment {
         tvCartSumPrice.setText("合计：￥0.00"+sumPrice);
         tvCartSavePrice.setText("节省：￥0.00"+savePrice);
         mAdapter.notifyDataSetChanged();
+        payPrice = sumPrice - savePrice;
     }
 
     int getPrice(String price) {
@@ -215,6 +221,16 @@ public class CartFragment extends Fragment {
         public void onReceive(Context context, Intent intent) {
             L.e(TAG, "onReceive");
             setPrice();
+        }
+    }
+
+    @OnClick(R.id.tv_cart_buy)
+    public void onBuyClick() {
+        if (sumPrice > 0) {
+            L.e(TAG, "sumPrice=" + sumPrice);
+            MFGT.gotoOrder(getActivity(),payPrice);
+        } else {
+            CommonUtils.showLongToast(R.string.order_nothing);
         }
     }
 
